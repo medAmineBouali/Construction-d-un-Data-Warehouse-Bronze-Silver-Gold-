@@ -25,11 +25,3 @@ This project involves designing and building a modern **Data Warehouse** from sc
 | 📄 `Construction dun data warehouse.slnx` | Visual Studio / SQL Server Data Tools solution file for the project. |
 
 ---
-
-## 🚀 How to Run the Project
-
-To execute this project locally, ensure you have **SQL Server** and **SQL Server Management Studio (SSMS)** (or Azure Data Studio) installed.
-
-1.  **Clone the repository:**
-    ```bash
-    git clone <your-repository-url>
