@@ -1,3 +1,5 @@
+use systemes_operationnels_data_warehouse;
+GO 
 
 CREATE OR ALTER PROCEDURE bronze.sp_load_bronze
 AS

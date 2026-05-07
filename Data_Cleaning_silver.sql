@@ -1,5 +1,5 @@
 use systemes_operationnels_data_warehouse;
-
+GO
 --------------------------------------------------
 -- silver.account
 --------------------------------------------------
@@ -42,12 +42,41 @@ IF OBJECT_ID('silver.account_mapping', 'U') IS NOT NULL
 DROP TABLE silver.account_mapping;
 
 CREATE TABLE silver.account_mapping (
-    AccountNumber INT,
+    AccountNumber INT PRIMARY KEY, -- We can now safely add a PRIMARY KEY!
     AccountName VARCHAR(25),
     PLLine VARCHAR(25),
     StatementType VARCHAR(25)
 );
 
+-- 1. Create a CTE to clean and deduplicate the raw data
+WITH CleanedAndDeduped AS (
+    SELECT
+        TRY_CAST(AccountNumber AS INT) AS AccountNumber,
+        UPPER(LTRIM(RTRIM(AccountName))) AS AccountName,
+
+        -- Gestion métier PLLine
+        CASE 
+            WHEN PLLine IS NULL OR LTRIM(RTRIM(PLLine)) = '' THEN NULL
+            ELSE UPPER(LTRIM(RTRIM(PLLine)))
+        END AS PLLine,
+
+        -- Standardisation StatementType
+        CASE 
+            WHEN StatementType IS NULL OR LTRIM(RTRIM(StatementType)) = '' THEN NULL
+            WHEN UPPER(REPLACE(LTRIM(RTRIM(StatementType)), ' ', '')) IN ('PL', 'P&L') THEN 'P&L'
+            ELSE UPPER(LTRIM(RTRIM(StatementType)))
+        END AS StatementType,
+
+        -- 2. Apply the ROW_NUMBER logic to partition by the AccountNumber
+        ROW_NUMBER() OVER (
+            PARTITION BY TRY_CAST(AccountNumber AS INT)
+            ORDER BY (SELECT NULL) -- Change this to 'ORDER BY AccountName DESC' etc., if you want a specific row to win
+        ) AS rn
+    FROM bronze.account_mapping_raw
+    WHERE TRY_CAST(AccountNumber AS INT) IS NOT NULL
+)
+
+-- 3. Insert only the first row (rn = 1) into the Silver table
 INSERT INTO silver.account_mapping (
     AccountNumber,
     AccountName,
@@ -55,25 +84,12 @@ INSERT INTO silver.account_mapping (
     StatementType
 )
 SELECT
-    TRY_CAST(AccountNumber AS INT),
-
-    UPPER(LTRIM(RTRIM(AccountName))),
-
-    -- Gestion métier PLLine: Return NULL instead of 'UNMAPPED'
-    CASE 
-        WHEN PLLine IS NULL OR LTRIM(RTRIM(PLLine)) = '' THEN NULL
-        ELSE UPPER(LTRIM(RTRIM(PLLine)))
-    END,
-
-    -- Standardisation StatementType: Return NULL instead of 'UNMAPPED'
-    CASE 
-        WHEN StatementType IS NULL OR LTRIM(RTRIM(StatementType)) = '' THEN NULL
-        WHEN UPPER(REPLACE(LTRIM(RTRIM(StatementType)), ' ', '')) IN ('PL', 'P&L') THEN 'P&L'
-        ELSE UPPER(LTRIM(RTRIM(StatementType)))
-    END
-
-FROM bronze.account_mapping_raw
-WHERE TRY_CAST(AccountNumber AS INT) IS NOT NULL;
+    AccountNumber,
+    AccountName,
+    PLLine,
+    StatementType
+FROM CleanedAndDeduped
+WHERE rn = 1;
 
 select * from silver.accounts;
 select * from silver.account_mapping;
@@ -187,3 +203,4 @@ FROM bronze.transaction_raw
 WHERE TRY_CAST(transaction_id AS INT) IS NOT NULL;
 
 select * from silver.transactions;
+

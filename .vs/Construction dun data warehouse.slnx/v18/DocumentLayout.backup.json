@@ -18,37 +18,31 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Data_Cleaning_silver.sql - not connected",
-              "DocumentMoniker": "C:\\Users\\amine\\Desktop\\simplon\\Bases des Donn\u00E9es\\Construction dun data warehouse\\Data_Cleaning_silver.sql",
-              "RelativeDocumentMoniker": "Data_Cleaning_silver.sql",
-              "ToolTip": "C:\\Users\\amine\\Desktop\\simplon\\Bases des Donn\u00E9es\\Construction dun data warehouse\\Data_Cleaning_silver.sql - not connected",
-              "RelativeToolTip": "Data_Cleaning_silver.sql - not connected",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2026-05-04T14:30:11.226Z",
-              "EditorCaption": " - not connected"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Bronze_data_loader.sql - not connected",
+              "Title": "Bronze_data_loader.sql - AmineLaptop\\SQLEXPRESS.systemes_operationnels_data_warehouse (AMINELAPTOP\\Amine (52))",
               "DocumentMoniker": "C:\\Users\\amine\\Desktop\\simplon\\Bases des Donn\u00E9es\\Construction dun data warehouse\\Bronze_data_loader.sql",
               "RelativeDocumentMoniker": "Bronze_data_loader.sql",
-              "ToolTip": "C:\\Users\\amine\\Desktop\\simplon\\Bases des Donn\u00E9es\\Construction dun data warehouse\\Bronze_data_loader.sql - not connected",
-              "RelativeToolTip": "Bronze_data_loader.sql - not connected",
+              "ToolTip": "C:\\Users\\amine\\Desktop\\simplon\\Bases des Donn\u00E9es\\Construction dun data warehouse\\Bronze_data_loader.sql - AmineLaptop\\SQLEXPRESS.systemes_operationnels_data_warehouse (AMINELAPTOP\\Amine (52))",
+              "RelativeToolTip": "Bronze_data_loader.sql - AmineLaptop\\SQLEXPRESS.systemes_operationnels_data_warehouse (AMINELAPTOP\\Amine (52))",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
               "WhenOpened": "2026-05-04T13:56:14.548Z",
-              "EditorCaption": " - not connected"
+              "EditorCaption": " - AmineLaptop\\SQLEXPRESS.systemes_operationnels_data_warehouse (AMINELAPTOP\\Amine (52))"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Data_Cleaning_silver.sql - AmineLaptop\\SQLEXPRESS.systemes_operationnels_data_warehouse (AMINELAPTOP\\Amine (51))",
+              "DocumentMoniker": "C:\\Users\\amine\\Desktop\\simplon\\Bases des Donn\u00E9es\\Construction dun data warehouse\\Data_Cleaning_silver.sql",
+              "RelativeDocumentMoniker": "Data_Cleaning_silver.sql",
+              "ToolTip": "C:\\Users\\amine\\Desktop\\simplon\\Bases des Donn\u00E9es\\Construction dun data warehouse\\Data_Cleaning_silver.sql - AmineLaptop\\SQLEXPRESS.systemes_operationnels_data_warehouse (AMINELAPTOP\\Amine (51))",
+              "RelativeToolTip": "Data_Cleaning_silver.sql - AmineLaptop\\SQLEXPRESS.systemes_operationnels_data_warehouse (AMINELAPTOP\\Amine (51))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-05-04T14:30:11.226Z",
+              "EditorCaption": " - AmineLaptop\\SQLEXPRESS.systemes_operationnels_data_warehouse (AMINELAPTOP\\Amine (51))"
             }
           ]
         }
